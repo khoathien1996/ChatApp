@@ -3,6 +3,7 @@ import firebase from 'firebase';
 class Backend {
   uid = '';
   messagesRef = null;
+  avatar='';
 
   firebaseApp = '';
   constructor(props) {
@@ -15,11 +16,12 @@ class Backend {
       messagingSenderId: "886726898740"
     });
     firebase.auth().onAuthStateChanged((user) => {
-      if(user){
+      if (user) {
         this.setUid(user.uid);
+        //this.setAvatar(user.avatar);
       } else {
         firebase.auth().signInAnonymously().catch((error) => {
-          alert(error.message)
+          alert(error.message);
         });
       }
     });
@@ -29,43 +31,53 @@ class Backend {
     return firebaseApp;
   } 
 
-  setUid(uid){
-    this.uid = uid;
+  setAvatar(value) {
+    this.avatar = value;
+  }
+  getAvatar() {
+    return this.avatar;
   }
 
-  getUid(){
+ setUid(value) {
+    this.uid = value;
+  }
+  getUid() {
     return this.uid;
   }
-
-  loadMessages(callback){
+  // retrieve the messages from the Backend
+  loadMessages(callback) {
     this.messagesRef = firebase.database().ref('messages');
     this.messagesRef.off();
-    const onReceive = (data) =>{
+    const onReceive = (data) => {
       const message = data.val();
       callback({
-        _id:data.key,
-        text:message.text,
+        _id: data.key,
+        text: message.text,
         createdAt: new Date(message.createdAt),
-        user:{
-          _id:message.user._id,
-          name:message.user.name,
+        user: {
+          _id: message.user._id,
+          name: message.user.name,
+          avatar: '../../images/avatar.png',
         },
+        //image: 'https://facebook.github.io/react/img/logo_og.png',
       });
     };
     this.messagesRef.limitToLast(20).on('child_added', onReceive);
   }
-
+  // send the message to the Backend
   sendMessage(message) {
-    for(let i = 0; i < message.length; i++) {
+    for (let i = 0; i < message.length; i++) {
       this.messagesRef.push({
-        text:message[i].text,
-        user:message[i].user,
+        text: message[i].text,
+        user: message[i].user,
+        //avatar: message[1i
         createdAt: firebase.database.ServerValue.TIMESTAMP,
       });
     }
   }
-  closeChat(){
-    if(this.messagesRef){
+  // close the connection to the Backend
+  closeChat() {
+    if (this.messagesRef) {
       this.messagesRef.off();
     }
   }

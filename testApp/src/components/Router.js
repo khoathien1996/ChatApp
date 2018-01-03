@@ -1,37 +1,42 @@
 import React, { Component } from 'react';
 import Login from './screen/Login';
 import Register from './screen/Register';
-import Register1 from './screen/testRegister';
-import MainScreen from './screen/MainScreen';
+import ChatScreen from './screen/ChatScreen';
+
+import Contacts from './screen/Contacts';
+
 import {StackNavigator} from 'react-navigation';
 
+import MainScreenNavigator from "./screen/MainTabs";
+
 export const HomeStack = StackNavigator({
- 
-  LoginScreen:{
-  	screen: Login,
-  	navigationOptions:{
-  		title: "Login" 
-  	}
-  },
+
+    LoginScreen:{
+        screen: Login,
+        navigationOptions:{
+            title: "Login"
+        }
+    },
+
+    MainTabs:{
+        screen: MainScreenNavigator,
+        navigationOptions:{
+            title: "Sky Chat"
+        }
+    },
   RegisterScreen:{
   	screen: Register,
   	navigationOptions:{
   		title:'Register'
   	}
   },
-  MainScreen:{
-    screen: MainScreen,
+  ChatScreen:{
+    screen: ChatScreen,
     navigationOptions:{
       title:'Chat'
     }
   },
 
-  RegisterScreen1:{
-    screen: Register1,
-    navigationOptions:{
-      title:'ahihi'
-    }
-  },
 
   
 });

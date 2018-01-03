@@ -1,179 +1,186 @@
 import React, {Component} from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, TextInput, Alert}  from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, TextInput, Alert, ImageBackground}  from 'react-native';
 import Backend from '../firebase/FirebaseConfig';
 export default class Register extends Component{
-	// static navigationOptions ={
-	// 	title:'Trang chu'
-	// }
+
 	constructor(props){
 		super(props);
 		this.state={
 			username:'',
 			password:'',
+			password2:''
 		}
 	}
 	register(){
-		Backend.getFireBaseApp().auth().createUserWithEmailAndPassword(this.state.username, this.state.password)
-		.then(() =>{
-			Alert.alert(
-			  'Alert Title',
-			  'Register sucessfully: ' + this.state.username,
-			  [			
-			    {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-			    {text: 'OK', onPress: () =>  this.props.navigation.navigate("LoginScreen")},
-			  ],
-			  { cancelable: false }
-			)
-			this.setState({
-				username:'',
-				password:'',
-			})
-		})	
-		.catch(function(error){
-			Alert.alert(
-			  'Alert Title',
-			  'Register failed ' +error,
-			  [			
-			    {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-			    {text: 'OK', onPress: () =>  console.log('OK Pressed')},
-			  ],
-			  { cancelable: false }
-			)
-		});
+		if(this.state.password == this.state.password2) {
+            Backend.getFireBaseApp().auth().createUserWithEmailAndPassword(this.state.username, this.state.password)
+                .then(() => {
+                    Alert.alert(
+                        'Alert Title',
+                        'Register sucessfully: ' + this.state.username,
+                        [
+                            {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                            {text: 'OK', onPress: () => this.props.navigation.navigate("LoginScreen")},
+                        ],
+                        {cancelable: false}
+                    )
+                    this.setState({
+                        username: '',
+                        password: '',
+                        password2: ''
+                    })
+                })
+                .catch(function (error) {
+                    Alert.alert(
+                        'Alert Title',
+                        'Register failed ' + error,
+                        [
+                            {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                            {text: 'OK', onPress: () => console.log('OK Pressed')},
+                        ],
+                        {cancelable: false}
+                    )
+                });
+        }
+        else{
+            Alert.alert(
+                'Error',
+                'Password does not match the confirm password',
+                [
+                    {text: 'OK', style: 'cancel'},
+                ],
+                {cancelable: false}
+            )
+		}
 	}
 
 	render(){
 
 		return(
+            <View style={styles.container}>
+                <ImageBackground source={require('../../images/background2.jpg')} style={styles.backgroundImage}>
+                    <View style={styles.logoContainer}>
+                        <Image
+                            style={styles.logoImage}
+                            source={require('../../images/logo.png')}
+                        />
+                        <Text style={styles.title}>Chat my life</Text>
+                        <View style={styles.inputContainer}>
+                            <TextInput
+                                underlineColorAndroid='transparent'
+                                placeholder="Email"
+                                style={styles.input}
+                                onChangeText={(username) => this.setState({username})}
+                                value={this.state.username}
+                            />
+                            <TextInput
+                                placeholder="Password"
+                                underlineColorAndroid='transparent'
+                                style={styles.input}
+                                onChangeText={(password) => this.setState({password})}
+                                secureTextEntry={true}
+                            />
+                            <TextInput
+                                placeholder="Retype password"
+                                underlineColorAndroid='transparent'
+                                style={styles.input}
+                                onChangeText={(password2) => this.setState({password2})}
+                                secureTextEntry={true}
+                            />
 
-		
-			<View style={styles.container}>
-				<View style={styles.logoContainer}>
-					<Image
-						style={styles.logo}
-					 	source={require('../../images/logo.png')}
-					/>
-					<Text style={styles.title}>
-						Chat my life
-					</Text>	
-				</View>
-				<View style={styles.loginContainer}>
-					<View style={styles.inputContainer}>
-						<TextInput 
-							placeholder="username"
-							placeholderTextColor='#7f8c8d'
-							style={styles.input} 
-							autoCorrect={false}
-			                autoCapitalize='none'
-			                keyBoardType='email-address'
-			                returnKeyType='next'
-							onChangeText={(username) => this.setState({username})}
-							//value={this.state.username}
-						/>
-						<TextInput 
-							placeholder="password"
-							placeholderTextColor='#7f8c8d'
-							onChangeText={(password) => this.setState({password})}
-							secureTextEntry
-							autoCorrect={false}
-			                autoCapitalize='none'
-			                returnKeyType='send'
-							style={styles.input} 
-						/>
 
-					</View>
+                            <TouchableOpacity style={styles.buttonContainer}
+                                              onPress ={() => {this.register()}}>
+                                <Text style={styles.buttonText}>REGISTER</Text>
+                            </TouchableOpacity>
 
-					<TouchableOpacity style={styles.buttonLogin}
-					onPress ={() => this.register()}
-						>
-						<Text style={styles.buttonText}>REGISTER</Text>
-						
-					</TouchableOpacity>	
-					<TouchableOpacity style={{alignItems:'center'}}>
-						<Text style = {{color: '#d35400'}}
-							onPress ={() => {this.props.navigation.navigate("LoginScreen")}}
-					 	>
-					 	 Back
-					 	 </Text>
-				 	 </TouchableOpacity>
+                            <View style={{alignItems: 'center'}}>
+                                <Text style={{color:'white', fontSize: 16, fontStyle: 'italic'}} onPress ={() => {this.props.navigation.navigate("LoginScreen")}}>
+                                    Back
+                                </Text>
+                            </View>
 
-					
-	
-				</View>
-
-			</View>
+                        </View>
+                    </View>
+                </ImageBackground>
+            </View>
 		);
 	}
 }
 
+const styles =StyleSheet.create({
+    container:{
+        flex: 1,
+        backgroundColor: '#62d4f8'
+    },
+    backgroundImage:{
+        flex: 1,
+        alignSelf: 'stretch',
+        width: null,
+        justifyContent: 'center',
+    },
+    content:{
+        alignItems: 'center',
+    },
+    logoContainer:{
+        alignItems: 'center',
+        flexGrow: 1,
+        top: '10%' ,
+    },
+    logoImage:{
+        width : 260,
+        height: 110,
+    },
+    logo:{
+        color: 'white',
+        fontSize: 40,
+        fontStyle: 'italic',
+        fontWeight: 'bold',
+        textShadowColor: '#252525',
+        textShadowOffset: {width: 2, height: 2},
+        textShadowRadius: 15,
+        marginBottom: 20,
+    },
+    inputContainer:{
+        margin: 20,
+        marginBottom:0,
+        padding:20,
+        paddingBottom: 10,
+        alignSelf: 'stretch',
+        borderWidth: 1,
+        borderColor: '#fff',
+        backgroundColor: 'rgba(255,255,255,0.2)',
+    },
+    input:{
+        fontSize: 16,
+        height:40,
+        padding:10,
+        marginBottom:10,
+        backgroundColor: 'rgba(255,255, 255,1)',
+    },
+    buttonContainer:{
+        alignSelf: 'stretch',
+        margin: 10,
+        padding: 20,
+        backgroundColor: 'blue',
+        borderWidth: 1,
+        borderColor: '#fff',
+        backgroundColor: 'rgba(255,255,255,0.6)',
+    },
+    buttonRegister:{
+        alignSelf: 'stretch',
+        marginTop: 10,
+        marginBottom: 20,
+        padding: 10,
+        backgroundColor: 'blue',
+        borderWidth: 1,
+        borderColor: '#fff',
+        backgroundColor: 'rgba(255,255,255,0.6)',
+    },
+    buttonText:{
+        fontSize: 16,
+        fontWeight: 'bold',
+        textAlign: 'center'
+    }
 
-const styles = StyleSheet.create({	
-	container:{
-		flex:1,
-		backgroundColor: '#2E9AFE',		
-	},
-	logoContainer:{
-		alignItems: 'center',
-		flexGrow: 1,
-		top: '20%' ,
-	},
-	logo: {
-		width : 260,
-		height: 110,
-	},
-	loginContainer:{
-		flex:1,
-		flexGrow:1.5,
-	},
-	formContainer:{
-
-	},
-	title:{
-		color: '#FFF',
-		marginTop: 10,
-		width: 160,
-		textAlign: 'center',
-		opacity: 0.9,
-		fontSize: 20,
-
-	},
-	button:{
-		backgroundColor: '#FACC2E',
-		width: 50,
-	},
-	textButton:{
-		color: 'blue',
-		fontSize: 20, 
-		padding: 10,
-	},
-	inputContainer:{
-		//flexGrow:1,
-	},
-	input:{
-		height: 40,
-		backgroundColor:'rgba(255,255,255,0.3)',
-		marginBottom: 10,
-		color: '#2c3e50',
-		width: '70%',
-		alignSelf: 'center',
-	},
-	buttonLogin:{
-		backgroundColor: 'green',
-		paddingVertical: 10,
-		marginBottom: 10,
-		width: '30%',
-		alignSelf: 'center',
-
-	},
-
-	buttonText:{
-		textAlign:'center',
-		color: '#FFFFFF', 
-		fontWeight: '700',
-	},
-	register:{
-		alignItems:'center'
-	}
 });
-
-
