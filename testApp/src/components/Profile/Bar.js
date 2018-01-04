@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import {
-    AppRegistry,
     StyleSheet,
     Text,
     View,
-    ImageBackground
 } from 'react-native';
 import {connect} from 'react-redux';
 

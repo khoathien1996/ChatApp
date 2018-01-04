@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import {View, Text, StyleSheet, TouchableOpacity, Image, TextInput, Alert}  from 'react-native';
+// import PropTypes from 'prop-types';
+// import {View, Text, StyleSheet, TouchableOpacity, Image, TextInput, Alert}  from 'react-native';
 import Backend from '../firebase/FirebaseConfig';
 import { GiftedChat } from 'react-native-gifted-chat';
 import {connect} from "react-redux";

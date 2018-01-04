@@ -26,15 +26,8 @@ MainScreenNavigator.navigationOptions ={
     title:"My Main"
 }
 
-//functioc
 export default MainScreenNavigator;
-// export default class MainTabs extends Component {
-//     render() {
-//         return (
-//           <MainScreenNavigator/>
-//         );
-//     }
-// }
+
 
 const styles = StyleSheet.create({
     container: {

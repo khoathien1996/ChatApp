@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import {
-    AppRegistry,
     StyleSheet,
-    ScrollView,
     TouchableOpacity,
     ListView,
     Image,

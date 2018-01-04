@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import Login from './screen/Login';
 import Register from './screen/Register';
 import ChatScreen from './screen/ChatScreen';
-
-import Contacts from './screen/Contacts';
-
 import {StackNavigator} from 'react-navigation';
 
 import MainScreenNavigator from "./screen/MainTabs";
