@@ -19,10 +19,10 @@ class PhotoGrid extends Component {
         };
     }
     componentWillMount(){
-        var username_login = 'thien1@gmail.com';
-        this.setState({
-            username: username_login,
-        });
+        // var username_login = 'thien@gmail.com';
+        // this.setState({
+        //     username: username_login,
+        // });
        // this.renderImage();
     }
 
@@ -30,7 +30,7 @@ class PhotoGrid extends Component {
         //alert(this.props.myValue);
         this.showImageThien();
         switch (this.props.myValue) {
-            case 'thien1@gmail.com':
+            case 'thien@gmail.com':
                 //alert("Anonymous ne");
                 return this.showImageThien();
                 break;
@@ -99,7 +99,30 @@ class PhotoGrid extends Component {
         );
     }
     showImageChuong(){
-        return (null);
+        return(
+            <ScrollView>
+                <View style={styles.photoGrid}>
+                    <View style={styles.photoWrap}>
+                        <Image style={styles.photo} source={require('../../images/ChiPu_01.jpg')}/>
+                    </View>
+                    <View style={styles.photoWrap}>
+                        <Image style={styles.photo} source={require('../../images/ChiPu_02.jpg')}/>
+                    </View>
+                    <View style={styles.photoWrap}>
+                        <Image style={styles.photo} source={require('../../images/ChiPu_03.jpg')}/>
+                    </View>
+                    <View style={styles.photoWrap}>
+                        <Image style={styles.photo} source={require('../../images/ChiPu_04.jpg')}/>
+                    </View>
+                    <View style={styles.photoWrap}>
+                        <Image style={styles.photo} source={require('../../images/ChiPu_05.jpg')}/>
+                    </View>
+                    <View style={styles.photoWrap}>
+                        <Image style={styles.photo} source={require('../../images/ChiPu_06.jpg')}/>
+                    </View>
+                </View>
+            </ScrollView>
+        );
     }
     render() {
         return(

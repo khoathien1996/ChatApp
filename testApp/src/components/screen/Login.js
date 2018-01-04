@@ -17,7 +17,7 @@ class Login extends Component{
 	login(){
 		Backend.getFireBaseApp().auth().signInWithEmailAndPassword(this.state.user_name, this.state.password)
 		.then(() =>{
-			if(this.state.user_name == 'thien1@gmail.com')
+			if(this.state.user_name == 'thien@gmail.com')
 				this.props.dispatch({type: 'THIEN_LOGIN'});
             if(this.state.user_name == 'buu@gmail.com')
                 this.props.dispatch({type: 'BUU_LOGIN'});

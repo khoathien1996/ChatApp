@@ -21,7 +21,7 @@ export const HomeStack = StackNavigator({
     MainTabs:{
         screen: MainScreenNavigator,
         navigationOptions:{
-            title: "Sky Chat"
+            title: "Sky"
         }
     },
   RegisterScreen:{

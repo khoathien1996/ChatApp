@@ -9,38 +9,7 @@ import {
 import {connect} from 'react-redux';
 
 class Bar extends Component {
-    // renderHeart(){
-    //     switch (this.props.myUsername) {
-    //         case 'thien1@gmail.com':
-    //             return '1M';
-    //             break;
-    //         case 'buu@gmail.com':
-    //             return '800K';
-    //             break;
-    //         case 'chuong@gmail.com':
-    //             return '600K';
-    //             break;
-    //         default:
-    //             return '0';
-    //             break;
-    //     }
-    // }
-    // renderFollowing(){
-    //     switch (this.props.myValue) {
-    //         case 'thien1@gmail.com':
-    //             return '5,2M';
-    //             break;
-    //         case 'buu@gmail.com':
-    //             return '2,4M';
-    //             break;
-    //         case 'chuong@gmail.com':
-    //             return '3,8M';
-    //             break;
-    //         default:
-    //             return '0';
-    //             break;
-    //     }
-    // }
+
     render() {
         return (
             <View style={styles.bar}>
@@ -65,7 +34,7 @@ const styles = StyleSheet.create({
     bar:{
       borderTopColor:'#fff',
       borderTopWidth: 4,
-      backgroundColor: '#ec2e4a',
+      backgroundColor: '#E74C3C',
       flexDirection: 'row'
     },
     barseparator:{

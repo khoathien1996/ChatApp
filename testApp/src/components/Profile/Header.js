@@ -31,7 +31,7 @@ class Header extends Component {
             <ImageBackground style={styles.headerBackground} source={require('../../images/bg_header.jpg')}>
                 <View style={styles.header}>
                     <View  style={styles.profile}>
-                        <Image  style={styles.profilepic} source={require('../../images/girl_01.png')}/>
+                        <Image  style={styles.profilepic} source={this.props.myImage}/>
                     </View>
                     <Text style={styles.name}>{this.props.myName}</Text>
                     <Text style={styles.pos}>- {this.props.myDescription} -</Text>
@@ -43,7 +43,7 @@ class Header extends Component {
 
 }
 function mapStateToProps(state){
-    return{myName: state.name, myDescription: state.description};
+    return{myName: state.name, myDescription: state.description, myImage: state.image};
 }
 
 export default connect(mapStateToProps)(Header);
